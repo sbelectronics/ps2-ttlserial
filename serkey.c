@@ -15,6 +15,8 @@
 #include <avr/pgmspace.h>
 #include <inttypes.h>
 
+#include <util/delay.h>
+
 #include "softuart.h"
 #include "keymap.h"
 
@@ -169,6 +171,7 @@ int main() {
       key_char = render_scan_code(key_code);
       led_on();
       uartSend(key_char);
+      _delay_ms(5);   /* delay so the led blink is obvious */
       led_off();
     }
   }

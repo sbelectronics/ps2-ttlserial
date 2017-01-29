@@ -28,10 +28,18 @@
 /** Initialise the UART
  */
 void uartInit() {
+#ifdef UART_NO_RX
+  // Set up TX pin
+  DDRB |= (1 << UART_TX);
+  PORTB |= (1 << UART_TX);
+#else
+
+#endif
+
+#ifdef UART_TWOPIN
   // Set as input and disable pullup
   DDRB  &= ~(1 << UART_RX);
   PORTB &= ~(1 << UART_RX);
-#ifdef UART_TWOPIN
   // Set up TX pin
   DDRB |= (1 << UART_TX);
   PORTB |= (1 << UART_TX);
@@ -40,6 +48,16 @@ void uartInit() {
   PCMSK |= (1 << UART_RX);
   GIMSK |= (1 << PCIE);
 #  endif /* UART_INTERRUPT */
+#else // not UART_1PIN
+#  ifdef UART_NO_RX
+  // Set up TX pin
+  DDRB |= (1 << UART_TX);
+  PORTB |= (1 << UART_TX);
+#else
+  // Set as input and disable pullup
+  DDRB  &= ~(1 << UART_RX);
+  PORTB &= ~(1 << UART_RX);
+#  endif /* UART_NO_RX */
 #endif /* UART_TWOPIN */
   }
 

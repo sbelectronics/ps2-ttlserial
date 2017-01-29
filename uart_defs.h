@@ -9,8 +9,6 @@
 #ifndef __UART_DEFS_H
 #define __UART_DEFS_H
 
-#define UART_NO_RX
-
 // See what mode we are in
 #if UART_TX == UART_RX
 #  define UART_ONEPIN

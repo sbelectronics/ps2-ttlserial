@@ -50,6 +50,9 @@
  */
 #define UART_RX   PINB2
 
+/* define to disable receive */
+#define UART_NO_RX
+
 /** Enable interrupt driven mode
  *
  * Only valid in two pin configuration. If this is defined and you are using
